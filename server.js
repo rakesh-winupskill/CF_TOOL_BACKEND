@@ -29,14 +29,18 @@ const uploadsDir = path.join(__dirname, "uploads");
 if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir);
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
 // Use existing routers
-app.use("/api/documents", docsRouter);
-app.use("/api/controls", controlsRouter);
-app.use("/api/soa", soaRouter);
-app.use("/api/gaps", gapsRouter);
-app.use("/api/risks", risksRouter);
-app.use("/api/tasks", taskRouter);
-app.use("/api/users", usersRouter);
+app.use("/v1/api/documents", docsRouter);
+app.use("/v1/api/controls", controlsRouter);
+app.use("/v1/api/soa", soaRouter);
+app.use("/v1/api/gaps", gapsRouter);
+app.use("/v1/api/risks", risksRouter);
+app.use("/v1/api/tasks", taskRouter);
+app.use("/v1/api/users", usersRouter);
 
 // Serve uploads
 app.use("/uploads", express.static(uploadsDir));
